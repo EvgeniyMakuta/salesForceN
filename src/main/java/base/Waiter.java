@@ -24,7 +24,7 @@ public class Waiter {
         }
     }
 
-    public void waiter(String locator, String label) {
+    public void waitForElementVisible(String locator, String label) {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, label))));
         } catch (TimeoutException e) {
@@ -32,7 +32,7 @@ public class Waiter {
         }
     }
 
-    public void waiter(By by, int time, String errorMessage) {
+    public void waitForElementVisible(By by, int time, String errorMessage) {
         try {
             new WebDriverWait(driver, time).until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (TimeoutException e) {

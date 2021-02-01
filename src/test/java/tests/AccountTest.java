@@ -1,10 +1,12 @@
 package tests;
 
+import objects.ActualAccount;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class AccountTest extends BaseTest {
+    ActualAccount actualAccount;
 
     @Test
     public void createAccount() {

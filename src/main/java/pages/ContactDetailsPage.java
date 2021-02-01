@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.testng.Assert.fail;
 
 public class ContactDetailsPage extends BasePage {
-    public static final By IS_TAB_OPENED_LOCATOR = By.xpath("//*[contains(text(), 'Department')]");
-    public static final By DETAILS_TAB = By.xpath("//*[@title='Details']");
-    String contactDetails = "//*[contains(text(), '%s')]/ancestor::div[contains(@class, 'slds-form-element')]//slot[@slot='outputField']";
+    private static final By OPENED_TAB_XPATH = By.xpath("//*[contains(text(), 'Department')]");
+    private static final By DETAILS_TAB_XPATH = By.xpath("//*[@title='Details']");
+   private static final String CONTACT_DETAILS_XPATH = "//*[contains(text(), '%s')]/ancestor::div[contains(@class, 'slds-form-element')]//slot[@slot='outputField']";
 
     public ContactDetailsPage(WebDriver driver) {
         super(driver);
@@ -24,24 +24,24 @@ public class ContactDetailsPage extends BasePage {
     @Override
     public ContactDetailsPage waitForPageOpened() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(IS_TAB_OPENED_LOCATOR));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(OPENED_TAB_XPATH));
         } catch (TimeoutException e) {
-            fail("AccountList Page is not loaded. locator: " + IS_TAB_OPENED_LOCATOR + " is not found");
+            fail("AccountList Page is not loaded. locator: " + OPENED_TAB_XPATH + " is not found");
         }
         return this;
     }
 
     public ContactDetailsPage waitForTabOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(IS_TAB_OPENED_LOCATOR));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(OPENED_TAB_XPATH));
         return this;
     }
 
     public ContactDetailsPage openDetailsTab() {
-        driver.findElement(DETAILS_TAB).click();
+        driver.findElement(DETAILS_TAB_XPATH).click();
         return this;
     }
 
     public String getAccountDetails(String text) {
-        return driver.findElement(By.xpath(String.format(contactDetails, text))).getText();
+        return driver.findElement(By.xpath(String.format(CONTACT_DETAILS_XPATH, text))).getText();
     }
 }

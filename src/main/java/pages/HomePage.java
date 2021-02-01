@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.testng.Assert.fail;
 
 public class HomePage extends BasePage {
-    public static final By REFRESH_BTN_LOCATOR = By.cssSelector("[title='Refresh Chart']");
+    private static final By REFRESH_BTN_CSS = By.cssSelector("[title='Refresh Chart']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -23,14 +23,14 @@ public class HomePage extends BasePage {
     @Override
     public HomePage waitForPageOpened() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(REFRESH_BTN_LOCATOR));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(REFRESH_BTN_CSS));
         } catch (TimeoutException e) {
-            fail("Home page is not loaded. Locator " + REFRESH_BTN_LOCATOR + " is not found");
+            fail("Home page is not loaded. Locator " + REFRESH_BTN_CSS + " is not found");
         }
         return this;
     }
 
     public boolean isPageOpened() {
-        return driver.findElement(REFRESH_BTN_LOCATOR).isDisplayed();
+        return driver.findElement(REFRESH_BTN_CSS).isDisplayed();
     }
 }

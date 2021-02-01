@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class InputWithSearch extends BaseElement {
-    String inputAndSearchLocator = "//*[contains(text(),'%s')]/ancestor::div[contains(@class, 'uiInput')]//input";
-    String optionInputAndSearchLocator = "//*[@role='option']/descendant::div[@title='%s']";
-    String searchLocator = "//*[contains(text(), '%s')]/ancestor::div[contains(@class, 'slds-form-element__control')]//button";
-    String searchAddressInput = "//*[contains(text(), '%s)]/ancestor::div[contains(@class, 'modal-container')]//input";
-    String optionSearchAddressLocator = "//*[@class='option']";
+   private static final String INPUT_AND_SEARCH_XPATH = "//*[contains(text(),'%s')]/ancestor::div[contains(@class, 'uiInput')]//input";
+    private static final String OPTION_INPUT_AND_SEARCH_XPATH = "//*[@role='option']/descendant::div[@title='%s']";
+    private static final String SEARCH_XPATH = "//*[contains(text(), '%s')]/ancestor::div[contains(@class, 'slds-form-element__control')]//button";
+    private static final String SEARCH_ADDRESS_INPUT_XPATH = "//*[contains(text(), '%s)]/ancestor::div[contains(@class, 'modal-container')]//input";
+    private static final String OPTION_SEARCH_ADDRESS_XPATH = "//*[@class='option']";
 
     public InputWithSearch(WebDriver driver, String label) {
         super(driver, label);
@@ -17,24 +17,24 @@ public class InputWithSearch extends BaseElement {
 
     public InputWithSearch inputAndSearch(String option) {
         writeActionMsg(label);
-        waiter(inputAndSearchLocator, label);
-        findInputWithSearch(inputAndSearchLocator, label).sendKeys(option);
-        waiter(optionInputAndSearchLocator, option);
-        findInputWithSearch(optionInputAndSearchLocator, option).click();
+        waitForElementVisible(INPUT_AND_SEARCH_XPATH, label);
+        getSearchInput(INPUT_AND_SEARCH_XPATH, label).sendKeys(option);
+        waitForElementVisible(OPTION_INPUT_AND_SEARCH_XPATH, option);
+        getSearchInput(OPTION_INPUT_AND_SEARCH_XPATH, option).click();
         return this;
     }
 
     public InputWithSearch search(String option) {
         writeActionMsg(label);
-        findInputWithSearch(searchLocator, label).click();
-        waiter(searchAddressInput, label);
-        findInputWithSearch(searchAddressInput, label).sendKeys(option);
-        waiter(optionSearchAddressLocator, label);
-        driver.findElements(By.xpath(optionSearchAddressLocator)).get(0).click();
+        getSearchInput(SEARCH_XPATH, label).click();
+        waitForElementVisible(SEARCH_ADDRESS_INPUT_XPATH, label);
+        getSearchInput(SEARCH_ADDRESS_INPUT_XPATH, label).sendKeys(option);
+        waitForElementVisible(OPTION_SEARCH_ADDRESS_XPATH, label);
+        driver.findElements(By.xpath(OPTION_SEARCH_ADDRESS_XPATH)).get(0).click();
         return this;
     }
 
-    public WebElement findInputWithSearch(String locator, String inputWithSearchName) {
+    public WebElement getSearchInput(String locator, String inputWithSearchName) {
         return driver.findElement(By.xpath(String.format(locator, inputWithSearchName)));
     }
 }

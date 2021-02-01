@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.testng.Assert.fail;
 
 public class LoginPage extends BasePage {
-    public static final By USERNAME_INPUT_LOCATOR = By.id("username");
-    public static final By PASSWORD_INPUT_LOCATOR = By.id("password");
-    public static final By LOGIN_BTN_LOCATOR = By.id("Login");
+    private static final By USERNAME_INPUT_LOCATOR = By.id("username");
+    private static final By PASSWORD_INPUT_LOCATOR = By.id("password");
+    private static final By LOGIN_BTN_LOCATOR = By.id("Login");
 
     public LoginPage(WebDriver driver) {
         super(driver);

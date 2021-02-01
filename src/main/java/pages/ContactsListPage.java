@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.testng.Assert.fail;
 
 public class ContactsListPage extends BasePage {
-    public static final By NEW_BTN_LOCATOR = By.cssSelector("[title=New]");
+    private static final By NEW_BTN_CSS = By.cssSelector("[title=New]");
 
     public ContactsListPage(WebDriver driver) {
         super(driver);
@@ -23,15 +23,15 @@ public class ContactsListPage extends BasePage {
     @Override
     public ContactsListPage waitForPageOpened() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(NEW_BTN_LOCATOR));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(NEW_BTN_CSS));
         } catch (TimeoutException e) {
-            fail("ContactsList Page is not loaded. locator: " + NEW_BTN_LOCATOR + " is not found");
+            fail("ContactsList Page is not loaded. locator: " + NEW_BTN_CSS + " is not found");
         }
         return this;
     }
 
-    public NewContactModal clickNew() {
-        driver.findElement(NEW_BTN_LOCATOR).click();
+    public NewContactModal clickNewButton() {
+        driver.findElement(NEW_BTN_CSS).click();
         return new NewContactModal(driver);
     }
 }

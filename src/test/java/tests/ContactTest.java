@@ -15,7 +15,7 @@ public class ContactTest extends BaseTest {
                 .waitForPageOpened();
         contactsListPage.openPage()
                 .waitForPageOpened()
-                .clickNew()
+                .clickNewButton()
                 .waitForPageOpened()
                 .create(contact)
                 .waitForPageOpened()

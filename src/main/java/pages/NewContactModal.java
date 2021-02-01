@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.testng.Assert.fail;
 
 public class NewContactModal extends BasePage {
-    public static final By SAVE_BTN_LOCATOR = By.cssSelector("[title=Save]");
+    private static final By SAVE_BTN_CSS = By.cssSelector("[title=Save]");
 
     public NewContactModal(WebDriver driver) {
         super(driver);
@@ -27,15 +27,15 @@ public class NewContactModal extends BasePage {
     @Override
     public NewContactModal waitForPageOpened() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(SAVE_BTN_LOCATOR));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(SAVE_BTN_CSS));
         } catch (TimeoutException e) {
-            fail("AccountModal Page is not loaded. locator: " + SAVE_BTN_LOCATOR + " is not found");
+            fail("AccountModal Page is not loaded. locator: " + SAVE_BTN_CSS + " is not found");
         }
         return this;
     }
 
     public ContactDetailsPage clickSave() {
-        driver.findElement(SAVE_BTN_LOCATOR).click();
+        driver.findElement(SAVE_BTN_CSS).click();
         return new ContactDetailsPage(driver);
     }
 

@@ -12,9 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.testng.Assert.fail;
 
 public class NewAccountModal extends BasePage {
-    public static final By SAVE_BTN_LOCATOR = By.cssSelector("[title=Save]");
-    public static final By CANCEL_BUTTON_LOCATOR = By.cssSelector("[title=Cancel]");
-    public static final By SAVE_NEW_BUTTON_LOCATOR = By.cssSelector("[title='Save & New']");
+    private static final By SAVE_BTN_CSS = By.cssSelector("[title=Save]");
+    private static final By CANCEL_BUTTON_CSS = By.cssSelector("[title=Cancel]");
+    private static final By SAVE_NEW_BUTTON_CSS = By.cssSelector("[title='Save & New']");
 
     public NewAccountModal(WebDriver driver) {
         super(driver);
@@ -29,9 +29,9 @@ public class NewAccountModal extends BasePage {
     @Override
     public NewAccountModal waitForPageOpened() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(SAVE_BTN_LOCATOR));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(SAVE_BTN_CSS));
         } catch (TimeoutException e) {
-            fail("AccountModal Page is not loaded. locator: " + SAVE_BTN_LOCATOR + " is not found");
+            fail("AccountModal Page is not loaded. locator: " + SAVE_BTN_CSS + " is not found");
         }
         return this;
     }
@@ -49,7 +49,7 @@ public class NewAccountModal extends BasePage {
     }
 
     public AccountDetailsPage clickSaveBtn() {
-        driver.findElement(SAVE_BTN_LOCATOR).click();
+        driver.findElement(SAVE_BTN_CSS).click();
         return new AccountDetailsPage(driver);
     }
 }
